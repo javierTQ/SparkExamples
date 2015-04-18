@@ -2,7 +2,7 @@ package spark.twitter;
 
 import static org.apache.spark.streaming.twitter.TwitterUtils.createStream;
 
-import java.util.ResourceBundle;
+import static java.util.ResourceBundle.getBundle;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.streaming.Duration;
@@ -47,10 +47,10 @@ public class TwitterExample {
 	private static Authorization getTwitterAuth(){
 		ConfigurationBuilder twitterConf = new ConfigurationBuilder().setDebugEnabled(false);
 		
-		String consumerKey = ResourceBundle.getBundle(twitterProperties).getString("consumerKey");
-		String consumerSecret = ResourceBundle.getBundle(twitterProperties).getString("consumerSecret");
-		String accessToken = ResourceBundle.getBundle(twitterProperties).getString("accessToken");
-		String accessTokenSecret = ResourceBundle.getBundle(twitterProperties).getString("accessTokenSecret");
+		String consumerKey = getBundle(twitterProperties).getString("consumerKey");
+		String consumerSecret = getBundle(twitterProperties).getString("consumerSecret");
+		String accessToken = getBundle(twitterProperties).getString("accessToken");
+		String accessTokenSecret = getBundle(twitterProperties).getString("accessTokenSecret");
 		
 		twitterConf.setOAuthConsumerKey(consumerKey);
 		twitterConf.setOAuthConsumerSecret(consumerSecret);
