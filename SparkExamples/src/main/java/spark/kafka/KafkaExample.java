@@ -3,7 +3,6 @@ package spark.kafka;
 import static org.apache.spark.streaming.kafka.KafkaUtils.createStream;
 
 import java.util.Arrays;
-import java.util.Map;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.streaming.Seconds;
@@ -17,6 +16,11 @@ import com.google.common.collect.ImmutableMap;
 
 public class KafkaExample {
 	
+	private static final String zkServer = "127.0.0.1";
+	private static final String group = "test_group";
+	private static final String topic = "test";
+	private static final Integer threads = 1;
+	
 	public static void main(String[] args) {
 		
 		// Create Spark configuration
@@ -27,14 +31,9 @@ public class KafkaExample {
 		// Create the streaming context
 		JavaStreamingContext context = new JavaStreamingContext(conf, Seconds.apply(5));
 		
-		// <topic, num_threads>
-		Map<String, Integer> topic_map = ImmutableMap.of("test", 2);
-		String zkServer = "127.0.0.1";
-		String group = "test_group";
-		
 		// Create kafka stream that return a tuple of messages <key, messages>.
 		JavaPairReceiverInputDStream<String, String> kafkaStream = 
-				createStream(context, zkServer, group, topic_map);
+				createStream(context, zkServer, group, ImmutableMap.of(topic, threads));
 		
 		// Transform messages to upperCase, split it in words and make a wordcount.
 		JavaPairDStream<String, Integer> wordCount = kafkaStream
