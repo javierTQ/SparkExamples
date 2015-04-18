@@ -1,0 +1,102 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.teix.spark</groupId>
+	<artifactId>SparkExamples</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<lz4.version>1.2.0</lz4.version>
+		<mvn.assembly.version>2.4</mvn.assembly.version>
+		<mvn.compiler.version>3.1</mvn.compiler.version>
+		<mvn.jar.version>2.2</mvn.jar.version>
+		<mvn.resource.version>2.6</mvn.resource.version>
+		<spark.scala.version>2.10</spark.scala.version>
+		<spark.version>1.1.1</spark.version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>local-repo</id>
+			<url>file://C://Data//JTQ//.m2</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+
+		<!-- Spark core dependency -->
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-core_${spark.scala.version}</artifactId>
+			<version>${spark.version}</version>
+		</dependency>
+
+		<!-- Spark streaming dependency -->
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-streaming_${spark.scala.version}</artifactId>
+			<version>${spark.version}</version>
+		</dependency>
+
+		<!-- Twitter API dependency -->
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-streaming-twitter_${spark.scala.version}</artifactId>
+			<version>${spark.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${mvn.compiler.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${mvn.jar.version}</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>${mvn.assembly.version}</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${mvn.resource.version}</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
