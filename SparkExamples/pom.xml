@@ -39,6 +39,13 @@
 			<version>${spark.version}</version>
 		</dependency>
 
+		<!-- Kafka API dependency -->
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-streaming-kafka_${spark.scala.version}</artifactId>
+			<version>${spark.version}</version>
+		</dependency>
+
 		<!-- Twitter API dependency -->
 		<dependency>
 			<groupId>org.apache.spark</groupId>
