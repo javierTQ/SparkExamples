@@ -34,7 +34,7 @@ public class TwitterExample {
 		JavaReceiverInputDStream<Status> twitterStream = createStream(context, getTwitterAuth(), hashtags);
 
 		// Remove RTs
-		JavaDStream<Status> twitterWithoutRt = twitterStream.filter(tweet -> !tweet.getText().contains("RT"));
+		JavaDStream<Status> twitterWithoutRt = twitterStream.filter(tweet -> !tweet.isRetweet());
 		
 		// Get only the text of the tweets
 		JavaDStream<String> tweets = twitterWithoutRt.map(tweet -> tweet.getText());
