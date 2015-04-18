@@ -26,14 +26,16 @@ public class KafkaExample {
 		
 		// Create the streaming context
 		JavaStreamingContext context = new JavaStreamingContext(conf, Seconds.apply(5));
-
+		
 		// <topic, num_threads>
 		Map<String, Integer> topic_map = ImmutableMap.of("test", 2);
+		String zkServer = "127.0.0.1";
+		String group = "test_group";
 		
 		// Create kafka stream that return a tuple of messages <key, messages>.
 		JavaPairReceiverInputDStream<String, String> kafkaStream = 
-				createStream(context, "127.0.0.1", "test", topic_map);
-
+				createStream(context, zkServer, group, topic_map);
+		
 		// Transform messages to upperCase, split it in words and make a wordcount.
 		JavaPairDStream<String, Integer> wordCount = kafkaStream
 				.map(kafkaMsg -> kafkaMsg._2.toUpperCase())
@@ -51,5 +53,4 @@ public class KafkaExample {
 		context.start();
 		context.awaitTermination();
 	}
-
 }
