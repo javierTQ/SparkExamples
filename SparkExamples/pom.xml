@@ -61,18 +61,19 @@
 			<artifactId>elasticsearch-spark_${spark.scala.version}</artifactId>
 			<version>${elasticsearch.connector.version}</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-sql_2.10</artifactId>
-			<version>1.1.1</version>
-		</dependency>
-		
+
 		<!-- Date and time library -->
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 			<version>${joda-time.version}</version>
+		</dependency>
+
+		<!-- Needed to mapper json to ES -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
 		</dependency>
 
 	</dependencies>
