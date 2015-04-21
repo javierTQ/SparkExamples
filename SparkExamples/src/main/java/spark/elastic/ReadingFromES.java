@@ -28,7 +28,9 @@ public class ReadingFromES {
 		
 		// Keys: fieldName, values: fieldValue
 		JavaRDD<Map<String, Object>> javaRDD = esRDD(context, index + "/" + mapping).values();
-		javaRDD.foreach(rdd -> System.out.println(rdd.values()));		
+		javaRDD.foreach(rdd -> System.out.println(rdd.values()));
+		
+		context.stop();
 	}
 
 }
